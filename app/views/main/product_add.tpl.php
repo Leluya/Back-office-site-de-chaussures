@@ -5,13 +5,20 @@
         <form action="" method="POST" class="mt-5">
             <div class="mb-3">
                 <label for="name" class="form-label">Nom</label>
-                <input type="text" class="form-control" id="name" placeholder="Nom de la catégorie">
+                <input type="text" class="form-control" id="name" placeholder="Nom du produit">
             </div>
             <div class="mb-3">
-                <label for="subtitle" class="form-label">Sous-titre</label>
-                <input type="text" class="form-control" id="subtitle" placeholder="Sous-titre" aria-describedby="subtitleHelpBlock">
+                <label for="subtitle" class="form-label">Description</label>
+                <input type="text" class="form-control" id="subtitle" placeholder="Description" aria-describedby="subtitleHelpBlock">
                 <small id="subtitleHelpBlock" class="form-text text-muted">
-                    Sera affiché sur la page d'accueil comme bouton devant l'image
+                    Sera affiché sur la page produit à côté de l'image
+                </small>
+            </div>
+            <div class="mb-3">
+                <label for="subtitle" class="form-label">Prix</label>
+                <input type="text" class="form-control" id="subtitle" placeholder="Prix" aria-describedby="subtitleHelpBlock">
+                <small id="subtitleHelpBlock" class="form-text text-muted">
+                    Sera affiché sur la page produit
                 </small>
             </div>
             <div class="mb-3">

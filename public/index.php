@@ -62,10 +62,10 @@ $router->map(
 
 $router->map(
     'GET',
-    '/catAdd',
+    '/category_add',
     [
-        'method' => 'categoryAdd',
-    'controller' => '\App\Controllers\CatAddController' // On indique le FQCN de la classe
+        'method' => 'category_add',
+    'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
     ],
     'category_add'
 );
@@ -82,10 +82,10 @@ $router->map(
 
 $router->map(
     'GET',
-    '/prodAdd',
+    '/product_add',
     [
-        'method' => 'productAdd',
-    'controller' => '\App\Controllers\ProdAddController' // On indique le FQCN de la classe
+        'method' => 'product_add',
+    'controller' => '\App\Controllers\ProductController' // On indique le FQCN de la classe
     ],
     'product_add'
 );
