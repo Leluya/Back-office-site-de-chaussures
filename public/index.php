@@ -50,7 +50,45 @@ $router->map(
     'main-home'
 );
 
+$router->map(
+    'GET',
+    '/categories',
+    [
+        'method' => 'category',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'categories'
+);
 
+$router->map(
+    'GET',
+    '/catAdd',
+    [
+        'method' => 'categoryAdd',
+    'controller' => '\App\Controllers\CatAddController' // On indique le FQCN de la classe
+    ],
+    'category_add'
+);
+
+$router->map(
+    'GET',
+    '/produits',
+    [
+        'method' => 'product',
+        'controller' => '\App\Controllers\ProductController' // On indique le FQCN de la classe
+    ],
+    'produits'
+);
+
+$router->map(
+    'GET',
+    '/prodAdd',
+    [
+        'method' => 'productAdd',
+    'controller' => '\App\Controllers\ProdAddController' // On indique le FQCN de la classe
+    ],
+    'product_add'
+);
 /* -------------
 --- DISPATCH ---
 --------------*/
