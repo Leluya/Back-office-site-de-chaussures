@@ -17,11 +17,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                
                             <?php for ($i = 0 ; $i < 3 ; $i++): ?>
-                            <?php $categoryObject = $array_categories[$i]; ?>
+                            <?php $categoryObject = $arrayCategories[$i]; ?>
                                 <tr>
-                                    <th scope="row"><?= $categoryObject->getId() ?></th>
+                                    <th scope="row"><?= $categoryObject->getId()  ?></th>
                                     <td><?= $categoryObject->getName() ?></td>
                                     <td class="text-end">
                                         <a href="" class="btn btn-sm btn-warning">
@@ -63,11 +63,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                           
                             <?php for ($i = 0 ; $i < 3 ; $i++): ?>
-                            <?php $productObject = $array_produits[$i]; ?>
                                 <tr>
-                                    <th scope="row"><?= $productObject->getId() ?></th>
-                                    <td><?= $productObject->getName() ?><</td>
+                                    <th scope="row"><?= $arrayProducts[$i]->getId() ?></th>
+                                    <td><?= $arrayProducts[$i]->getName() ?><</td>
                                     <td class="text-end">
                                         <a href="" class="btn btn-sm btn-warning">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

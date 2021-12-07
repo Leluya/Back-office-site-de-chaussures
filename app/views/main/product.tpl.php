@@ -16,7 +16,7 @@
                 <tr>
                     <th scope="row"><?= $prodArray->getId() ?></th>
                     <td><?= $prodArray->getName() ?></td>
-                    <td><?= $prodArray->getDescription() ?></td>
+                    <td><?= substr($prodArray->getDescription(),0 ,50) . "..." ?></td>
                     <td><?= $prodArray->getPrice() ?> €</td>
                     <td class="text-end">
                         <a href="" class="btn btn-sm btn-warning">
@@ -25,7 +25,7 @@
                         <!-- Example single danger button -->
                         <div class="btn-group">
                             <button type="button" class="btn btn-sm btn-danger dropdown-toggle"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                             <div class="dropdown-menu">

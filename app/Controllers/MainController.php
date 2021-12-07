@@ -15,15 +15,14 @@ class MainController extends CoreController
      */
     public function home()
     {
-        $productObject = new Product();
-        $arrayProduits = $productObject->findAll();
+      
+        $arrayProducts = Product::findAll();
         
-        $categoryObject = new Category();
-        $arrayCategories = $categoryObject->findAll();
+        $arrayCategories = Category::findAll();
         
         // On appelle la méthode show() de l'objet courant
         // En argument, on fournit le fichier de Vue
         // Par convention, chaque fichier de vue sera dans un sous-dossier du nom du Controller
-        $this->show('main/home', ['array_produits' => $arrayProduits],['array_categories' => $arrayCategories]);
+        $this->show('main/home',['arrayCategories' => $arrayCategories], ['arrayProducts' => $arrayProducts]);
     }
 }

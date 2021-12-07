@@ -55,7 +55,7 @@ class Product extends CoreModel
      * @param int $productId ID du produit
      * @return Product
      */
-    public function find($productId)
+    public static function find($productId)
     {
         // récupérer un objet PDO = connexion à la BDD
         $pdo = Database::getPDO();
@@ -83,7 +83,7 @@ class Product extends CoreModel
      *
      * @return Product[]
      */
-    public function findAll()
+    public static function findAll()
     {
         $pdo = Database::getPDO();
         $sql = 'SELECT * FROM `product`';
