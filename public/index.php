@@ -8,6 +8,9 @@
 // mais aussi d'activer le chargement automatique des classes (convention PSR-4)
 require_once '../vendor/autoload.php';
 
+// on démarre les sessions
+session_start();
+
 /* ------------
 --- ROUTAGE ---
 -------------*/
@@ -50,6 +53,175 @@ $router->map(
     'main-home'
 );
 
+// CATEGORIES :
+$router->map(
+    'GET',
+    '/category/list',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-list'
+);
+$router->map(
+    'GET',
+    '/category/add',
+    [
+        'method' => 'show_form',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-add'
+);
+$router->map(
+    'POST',
+    '/category/add',
+    [
+        'method' => 'create_or_update',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-create'
+);
+$router->map(
+    'GET',
+    '/category/update/[i:categoryId]',
+    [
+        'method' => 'show_form',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-edit'
+);
+$router->map(
+    'POST',
+    '/category/update/[i:categoryId]',
+    [
+        'method' => 'create_or_update',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-update'
+);
+$router->map(
+    'GET',
+    '/category/delete/[i:categoryId]',
+    [
+        'method' => 'delete',
+        'controller' => '\App\Controllers\CategoryController' // On indique le FQCN de la classe
+    ],
+    'category-delete'
+);
+
+// PRODUCT :
+$router->map(
+    'GET',
+    '/product/list',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\ProductController' // On indique le FQCN de la classe
+    ],
+    'product-list'
+);
+$router->map(
+    'GET',
+    '/product/add',
+    [
+        'method' => 'show_form',
+        'controller' => '\App\Controllers\ProductController' // On indique le FQCN de la classe
+    ],
+    'product-add'
+);
+$router->map(
+    'POST',
+    '/product/add',
+    [
+        'method' => 'create_or_update',
+        'controller' => '\App\Controllers\ProductController' // On indique le FQCN de la classe
+    ],
+    'product-create'
+);
+$router->map(
+    'GET',
+    '/product/update/[i:productId]',
+    [
+        'method' => 'show_form',
+        'controller' => '\App\Controllers\ProductController' // On indique le FQCN de la classe
+    ],
+    'product-edit'
+);
+$router->map(
+    'POST',
+    '/product/update/[i:productId]',
+    [
+        'method' => 'create_or_update',
+        'controller' => '\App\Controllers\ProductController' // On indique le FQCN de la classe
+    ],
+    'product-update'
+);
+$router->map(
+    'GET',
+    '/product/delete/[i:productId]',
+    [
+        'method' => 'delete',
+        'controller' => '\App\Controllers\ProductController' // On indique le FQCN de la classe
+    ],
+    'product-delete'
+);
+
+// SECURITY
+$router->map(
+    'GET',
+    '/login',
+    [
+        'method' => 'showLoginForm',
+        'controller' => '\App\Controllers\SecurityController' // On indique le FQCN de la classe
+    ],
+    'security-login-form'
+);
+$router->map(
+    'POST',
+    '/login',
+    [
+        'method' => 'login',
+        'controller' => '\App\Controllers\SecurityController' // On indique le FQCN de la classe
+    ],
+    'security-login'
+);
+$router->map(
+    'GET',
+    '/logout',
+    [
+        'method' => 'logout',
+        'controller' => '\App\Controllers\SecurityController' // On indique le FQCN de la classe
+    ],
+    'security-logout'
+);
+
+// USERS
+$router->map(
+    'GET',
+    '/user/list',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\UserController' // On indique le FQCN de la classe
+    ],
+    'user-list'
+);
+$router->map(
+    'GET',
+    '/user/add',
+    [
+        'method' => 'show_form',
+        'controller' => '\App\Controllers\UserController' // On indique le FQCN de la classe
+    ],
+    'user-add'
+);
+$router->map(
+    'POST',
+    '/user/add',
+    [
+        'method' => 'create_or_update',
+        'controller' => '\App\Controllers\UserController' // On indique le FQCN de la classe
+    ],
+    'user-create'
+);
 
 /* -------------
 --- DISPATCH ---

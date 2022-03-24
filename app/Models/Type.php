@@ -83,6 +83,37 @@ class Type extends CoreModel
         return $types;
     }
 
+    public function insert() {
+
+    }
+
+    public function update() {
+        
+    }
+
+    /**
+     * Méthode permettant de supprimer un enregistrement dans la table type
+     * L'objet courant doit contenir l'id, et toutes les données à ajouter : 1 propriété => 1 colonne dans la table
+     *
+     * @return bool
+     */
+    public function delete() {
+        // Récupération de l'objet PDO représentant la connexion à la DB
+        $pdo = Database::getPDO();
+
+        // on prépare la requete
+       $stmt = $pdo->prepare("
+            DELETE FROM `type`
+            WHERE id = :id
+        ");
+
+        // on va associer nos variables
+        $stmt->bindParam(':id', $this->id);
+
+        // on execute et on retourne le résultat (true si ok, false si nok)
+        return $stmt->execute();
+    }
+
     /**
      * Get the value of name
      *
