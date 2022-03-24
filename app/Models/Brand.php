@@ -56,7 +56,7 @@ class Brand extends CoreModel
      *
      * @return Brand[]
      */
-    public function findAll()
+    public static function findAll()
     {
         $pdo = Database::getPDO();
         $sql = 'SELECT * FROM `brand`';
@@ -146,6 +146,29 @@ class Brand extends CoreModel
 
         // On retourne VRAI, si au moins une ligne ajoutée
         return ($updatedRows > 0);
+    }
+
+    /**
+     * Méthode permettant de supprimer un enregistrement dans la table brand
+     * L'objet courant doit contenir l'id, et toutes les données à ajouter : 1 propriété => 1 colonne dans la table
+     *
+     * @return bool
+     */
+    public function delete() {
+        // Récupération de l'objet PDO représentant la connexion à la DB
+        $pdo = Database::getPDO();
+
+        // on prépare la requete
+       $stmt = $pdo->prepare("
+            DELETE FROM `brand`
+            WHERE id = :id
+        ");
+
+        // on va associer nos variables
+        $stmt->bindParam(':id', $this->id);
+
+        // on execute et on retourne le résultat (true si ok, false si nok)
+        return $stmt->execute();
     }
 
     /**

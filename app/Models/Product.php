@@ -50,7 +50,7 @@ class Product extends CoreModel
     private $type_id;
 
     /**
-     * Méthode permettant de récupérer un enregistrement de la table Product en fonction d'un id donné
+     * Méthode statique permettant de récupérer un enregistrement de la table Product en fonction d'un id donné
      *
      * @param int $productId ID du produit
      * @return Product
@@ -79,7 +79,7 @@ class Product extends CoreModel
     }
 
     /**
-     * Méthode permettant de récupérer tous les enregistrements de la table product
+     * Méthode statique permettant de récupérer tous les enregistrements de la table product
      *
      * @return Product[]
      */
@@ -92,6 +92,130 @@ class Product extends CoreModel
 
         return $results;
     }
+
+    /**
+     * Méthode permettant d'ajouter un enregistrement dans la table product
+     * L'objet courant doit contenir toutes les données à ajouter : 1 propriété => 1 colonne dans la table
+     *
+     * @return bool
+     */
+    public function insert()
+    {
+        // Récupération de l'objet PDO représentant la connexion à la DB
+        $pdo = Database::getPDO();
+
+        // Ecriture de la requête INSERT INTO
+        // $sql = "
+        //     INSERT INTO `product` (name, description, picture, price, rate, status, brand_id, type_id, category_id)
+        //     VALUES ('" . $this->name . "', '" . $this->description . "', '{$this->picture}', '{$this->price}', '{$this->rate}', '{$this->status}', '{$this->brand_id}', '{$this->type_id}', '{$this->category_id}')
+        // ";
+
+        // on prépare la requete
+        $stmt = $pdo->prepare("
+            INSERT INTO `product` (name, description, picture, price, rate, status, brand_id, type_id, category_id)
+            VALUES (:name, :description, :picture, :price, :rate, :status, :brand_id, :type_id, :category_id)
+        ");
+
+        // on va associer nos variables
+        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':description', $this->description);
+        $stmt->bindParam(':picture', $this->picture);
+        $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':rate', $this->rate);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':brand_id', $this->brand_id);
+        $stmt->bindParam(':type_id', $this->type_id);
+        $stmt->bindParam(':category_id', $this->category_id);
+
+        // on lance la req
+        if ($stmt->execute()) {
+            // Alors on récupère l'id auto-incrémenté généré par MySQL
+            $this->id = $pdo->lastInsertId();
+
+            // On retourne VRAI car l'ajout a parfaitement fonctionné
+            return true;
+            // => l'interpréteur PHP sort de cette fonction car on a retourné une donnée
+        }
+        return false;
+    }
+
+    /**
+     * Méthode permettant de mettre à jour un enregistrement dans la table product
+     * L'objet courant doit contenir l'id, et toutes les données à ajouter : 1 propriété => 1 colonne dans la table
+     *
+     * @return bool
+     */
+    public function update()
+    {
+        // Récupération de l'objet PDO représentant la connexion à la DB
+        $pdo = Database::getPDO();
+
+       // on prépare la requete
+       $stmt = $pdo->prepare("
+            UPDATE `product`
+            SET
+                name = :name,
+                description = :description,
+                picture = :picture,
+                price = :price,
+                rate = :rate,
+                status = :status,
+                brand_id = :brand_id,
+                type_id = :type_id,
+                category_id = :category_id,
+                updated_at = NOW()
+            WHERE id = :id
+        ");
+
+        // on va associer nos variables
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':description', $this->description);
+        $stmt->bindParam(':picture', $this->picture);
+        $stmt->bindParam(':price', $this->price);
+        $stmt->bindParam(':rate', $this->rate);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':brand_id', $this->brand_id);
+        $stmt->bindParam(':type_id', $this->type_id);
+        $stmt->bindParam(':category_id', $this->category_id);
+
+        // on lance la req
+        if ($stmt->execute()) {
+            // Alors on récupère l'id auto-incrémenté généré par MySQL
+            $this->id = $pdo->lastInsertId();
+
+            // On retourne VRAI car l'ajout a parfaitement fonctionné
+            return true;
+            // => l'interpréteur PHP sort de cette fonction car on a retourné une donnée
+        }
+
+        // Si on arrive ici, c'est que quelque chose n'a pas bien fonctionné => FAUX
+        return false;
+    }
+
+    /**
+     * Méthode permettant de supprimer un enregistrement dans la table product
+     * L'objet courant doit contenir l'id, et toutes les données à ajouter : 1 propriété => 1 colonne dans la table
+     *
+     * @return bool
+     */
+    public function delete() {
+        // Récupération de l'objet PDO représentant la connexion à la DB
+        $pdo = Database::getPDO();
+
+        // on prépare la requete
+       $stmt = $pdo->prepare("
+            DELETE FROM `product`
+            WHERE id = :id
+        ");
+
+        // on va associer nos variables
+        $stmt->bindParam(':id', $this->id);
+
+        // on execute et on retourne le résultat (true si ok, false si nok)
+        return $stmt->execute();
+    }
+
 
     /**
      * Get the value of name
